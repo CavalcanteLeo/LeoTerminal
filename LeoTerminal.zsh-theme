@@ -292,7 +292,8 @@ build_prompt() {
 	echo -n "\n"
 	prompt_status
 	prompt_battery
-	prompt_time
+	prompt_context
+	# prompt_time
 	prompt_virtualenv
 	prompt_dir
 	prompt_git
@@ -300,7 +301,7 @@ build_prompt() {
 	prompt_end
 	CURRENT_BG='NONE'
 	echo -n "\n"
-	prompt_context
+	# prompt_context
 	prompt_end
 }
 

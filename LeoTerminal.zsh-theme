@@ -50,9 +50,9 @@ prompt_end() {
 # Context: user@hostname (who am I and where am I)
 prompt_context() {
 	if [[ -n "$SSH_CLIENT" ]]; then
-		prompt_segment 234 252 "$fg_bold[252]%(!.%{%F{252}%}.) $USER@%m$fg_no_bold[252]"
+		prompt_segment 237 252 "$fg_bold[252]%(!.%{%F{252}%}.) $USER@%m$fg_no_bold[252]"
 	else
-		prompt_segment 234 252 "$fg_bold[252]%(!.%{%F{252}%}.)  $USER$fg_no_bold[252]"
+		prompt_segment 237 252 "$fg_bold[252]%(!.%{%F{252}%}.) $USER$fg_no_bold[252]"
 	fi
 }
 
@@ -268,7 +268,8 @@ prompt_virtualenv() {
 
 prompt_time() {
 	# 197 = 197
-	prompt_segment 000 238 "$fg_bold[white]  %D{%a %e %b %H:%M}  $fg_no_bold[white]"
+	# prompt_segment 000 238 "$fg_bold[white]  %D{%a %e %b %H:%M}  $fg_no_bold[white]"
+	prompt_segment 000 238 "$fg_bold[white]  %D{%a %e %b} $fg_no_bold[white]"
 }
 
 # Status:

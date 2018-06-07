@@ -15,6 +15,16 @@ CURRENT_BG='NONE'
 	# what font the user is viewing this source code in. Do not replace the
 	# escape sequence with a single literal character.
 	SEGMENT_SEPARATOR=$'\ue0b0' # 
+
+	#on tabbar, show only the folder name, not the full path
+	if [ $ITERM_SESSION_ID ]; then
+	  DISABLE_AUTO_TITLE="true"
+	  echo -ne "\033];${PWD##*/}\007"
+	fi
+
+	precmd() {
+	  echo -ne "\033];${PWD##*/}\007"
+	}
 }
 
 # Begin a segment

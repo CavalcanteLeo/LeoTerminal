@@ -1,5 +1,8 @@
 # LeoTerminal
 
+Theme for [oh-my-zsh](https://github.com/robbyrussell/oh-my-zsh/)
+
+
 <img width="706" alt="captura de tela 2018-06-07 as 00 21 27" src="https://user-images.githubusercontent.com/1735944/41076611-d9c35d6e-69e8-11e8-929a-0d894b0e271e.png">
 
 This theme uses poweline fonts and font awesome, to install, read the documentations above

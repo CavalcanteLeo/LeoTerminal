@@ -107,7 +107,7 @@ prompt_git() {
 	local PL_BRANCH_CHAR
 	() {
 		local LC_ALL="" LC_CTYPE="en_US.UTF-8"
-		PL_BRANCH_CHAR=$'\ue725'         # 
+		PL_BRANCH_CHAR=$''
 	}
 	local ref dirty mode repo_path clean has_upstream
 	local modified untracked added deleted tagged stashed
@@ -125,7 +125,7 @@ prompt_git() {
 			bgclr='197'
 			fgclr='255'
 		else
-			clean=' ✔'
+			clean=' '
 
 			bgclr='002'
 			fgclr='255' # dark-gray
@@ -138,7 +138,7 @@ prompt_git() {
 
 		local number_of_untracked_files=$(\grep -c "^??" <<< "${git_status}")
 
-		if [[ $number_of_untracked_files -gt 0 ]]; then untracked=" $number_of_untracked_files☀"; fi
+		if [[ $number_of_untracked_files -gt 0 ]]; then untracked=" $number_of_untracked_files ☀"; fi
 
 		local number_added=$(\grep -c "^A" <<< "${git_status}")
 		if [[ $number_added -gt 0 ]]; then added=" $number_added✚"; fi
@@ -160,29 +160,29 @@ prompt_git() {
 
 		local number_deleted=$(\grep -c "^.D" <<< "${git_status}")
 		if [[ $number_deleted -gt 0 ]]; then
-			deleted=" $number_deleted‒"
+			deleted=" $number_deleted "
 			bgclr='208' # 197
 			fgclr='232' # dark-grey
 		fi
 
 		local number_added_deleted=$(\grep -c "^D" <<< "${git_status}")
 		if [[ $number_deleted -gt 0 && $number_added_deleted -gt 0 ]]; then
-			deleted="$deleted$number_added_deleted±"
+			deleted="$deleted$number_added_deleted ±"
 		elif [[ $number_added_deleted -gt 0 ]]; then
-			deleted=" ‒$number_added_deleted±"
+			deleted=" ‒$number_added_deleted ±"
 		fi
 
 		local tag_at_current_commit=$(git describe --exact-match --tags $current_commit_hash 2> /dev/null)
-		if [[ -n $tag_at_current_commit ]]; then tagged=" ☗$tag_at_current_commit "; fi
+		if [[ -n $tag_at_current_commit ]]; then tagged=" ☗ $tag_at_current_commit "; fi
 
 		local number_of_stashes="$(git stash list -n1 2> /dev/null | wc -l)"
 		if [[ $number_of_stashes -gt 0 ]]; then
-			stashed=" $number_of_stashes⚙"
+			stashed=" $number_of_stashes"
 			bgclr='206' # good-206
 			fgclr='252' # good-252-color-spectrum
 		fi
 
-		if [[ $number_added -gt 0 || $number_added_modified -gt 0 || $number_added_deleted -gt 0 ]]; then ready_commit=' ⚑'; fi
+		if [[ $number_added -gt 0 || $number_added_modified -gt 0 || $number_added_deleted -gt 0 ]]; then ready_commit=' '; fi
 
 		local upstream_prompt=''
 		if [[ $has_upstream == true ]]; then
@@ -190,7 +190,7 @@ prompt_git() {
 			commits_ahead=$(\grep -c "^<" <<< "$commits_diff")
 			commits_behind=$(\grep -c "^>" <<< "$commits_diff")
 			upstream_prompt="$(git rev-parse --symbolic-full-name --abbrev-ref @{upstream} 2> /dev/null)"
-			upstream_prompt=$(sed -e 's/\/.*$/ ☊ /g' <<< "$upstream_prompt")
+			upstream_prompt=$(sed -e 's/\/.*$/  /g' <<< "$upstream_prompt")
 		fi
 
 		has_diverged=false
